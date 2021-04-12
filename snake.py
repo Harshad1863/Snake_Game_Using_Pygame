@@ -1,4 +1,6 @@
 import pygame
+import random
+
 pygame.init()
 
 #colors
@@ -23,12 +25,15 @@ snake_y=55
 velocity_x=0
 velocity_y=0
 snake_size=10
+
+food_x = random.randint(0,screen_width)
+food_y = random.randint(0,screen_height)
+
 fps=30  #frame per sec
 
 clock = pygame.time.Clock()
-
-
-
+ 
+  
 #Game loop
 while not exit_game:
     for event in pygame.event.get():
@@ -64,8 +69,12 @@ while not exit_game:
     snake_y += velocity_y
 
 
-    gameWindow.fill(white) 
+    gameWindow.fill(white)
+     #create food
+    pygame.draw.rect(gameWindow,red, [food_x, food_y, snake_size , snake_size ])
+    # Create Snake
     pygame.draw.rect(gameWindow,black, [snake_x, snake_y, snake_size , snake_size ])  
+    
     pygame.display.update()
     clock.tick(fps)
 
