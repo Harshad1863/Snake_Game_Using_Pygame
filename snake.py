@@ -12,7 +12,7 @@ screen_height = 600
 gameWindow = pygame.display.set_mode((1000,500)) 
 
 #Game title
-pygame.display.set_caption("Snake WIth Harshad")
+pygame.display.set_caption("Snake With Harshad")
 
 
 # Game specific Variable
@@ -20,6 +20,8 @@ exit_game = False
 game_over = False
 snake_x=45
 snake_y=55
+velocity_x=0
+velocity_y=0
 snake_size=10
 fps=30  #frame per sec
 
@@ -36,25 +38,30 @@ while not exit_game:
         if event.type == pygame.KEYDOWN:
             #for Right arrow key
             if event.key == pygame.K_RIGHT:
-                snake_x = snake_x + 10
+                velocity_x = 10
+                velocity_y = 0
 
             #for Left arrow key
             if event.key == pygame.K_LEFT:
-                snake_x = snake_x - 10
+                velocity_x = - 10
+                velocity_y = 0
             
             #for UP arrow key
             if event.key == pygame.K_UP:
-                snake_y = snake_y - 10
+                velocity_y = -10
+                velocity_x = 0
 
             #for Down arrow key
             if event.key == pygame.K_DOWN:
-                snake_y = snake_y + 10
+                velocity_y =  10
+                velocity_x = 0
 
             
 
             
 
-
+    snake_x += velocity_x
+    snake_y += velocity_y
 
 
     gameWindow.fill(white) 
