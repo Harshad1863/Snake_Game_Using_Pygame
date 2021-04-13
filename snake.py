@@ -7,8 +7,6 @@ pygame.mixer.init()
 
 pygame.init()
 
-#BackgrundImage
-
 
 #colors
 white =(255,255,255)
@@ -18,7 +16,11 @@ black =(0,0,0)
 #creating window
 screen_width = 900
 screen_height = 600
-gameWindow = pygame.display.set_mode((1000,500)) 
+gameWindow = pygame.display.set_mode((900,600)) 
+
+#BackgrundImage
+bgimg = pygame.image.load("snake1.png")
+bgimg = pygame.transform.scale(bgimg,(screen_width,screen_height)).convert_alpha()
 
 #Game title
 pygame.display.set_caption("Snake With Harshad")
@@ -142,6 +144,7 @@ def gameloop():
 
 
             gameWindow.fill(white)
+            gameWindow.blit(bgimg,(0,0))
             text_screen("Score: " + str(score * 10), red, 5, 5)
             #create food
             pygame.draw.rect(gameWindow,red, [food_x, food_y, snake_size , snake_size ])
