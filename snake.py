@@ -31,7 +31,24 @@ def plot_snake(gameWindow, color, snk_list, snake_size):
     for x,y in snk_list:
         pygame.draw.rect(gameWindow, color, [x, y, snake_size, snake_size])
 
- 
+#Home Screen Window
+def welcome():
+    exit_game = False
+    while not exit_game:
+        gameWindow.fill((233,210,229))
+        text_screen("Welcome to Snakes", black, 260, 200)
+        text_screen("Press Space Bar To Play", black, 232, 250)
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                exit_game = True
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE:
+                    gameloop()
+
+        pygame.display.update()
+        clock.tick(60)
+
+
 #Game loop
 def gameloop():
 
@@ -67,7 +84,7 @@ def gameloop():
 
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_RETURN:
-                        gameloop()
+                        welcome()
 
 
         else:
@@ -95,6 +112,10 @@ def gameloop():
                     if event.key == pygame.K_DOWN:
                         velocity_y =  init_velocity
                         velocity_x = 0
+                    
+                    #Cheat code(Press q and score increasing)
+                  #  if event.key == pygame.K_q:
+                  #      score += 10
 
                     
 
@@ -141,5 +162,5 @@ def gameloop():
     pygame.quit()
     quit()
 
-gameloop()
+welcome()
     
