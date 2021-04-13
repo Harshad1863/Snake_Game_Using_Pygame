@@ -12,6 +12,8 @@ pygame.init()
 white =(255,255,255)
 red = (255,0,0)
 black =(0,0,0)
+green = (57,255,20)
+blue = (31,81,255)
 
 #creating window
 screen_width = 900
@@ -21,6 +23,16 @@ gameWindow = pygame.display.set_mode((900,600))
 #BackgrundImage
 bgimg = pygame.image.load("snake1.png")
 bgimg = pygame.transform.scale(bgimg,(screen_width,screen_height)).convert_alpha()
+
+#gameoverImg
+goimg = pygame.image.load("snake.jpg")
+goimg = pygame.transform.scale(goimg,(screen_width,screen_height)).convert_alpha()
+
+#HomeImg
+homeimg = pygame.image.load("ss.jpg")
+homeimg = pygame.transform.scale(homeimg,(screen_width,screen_height)).convert_alpha()
+
+
 
 #Game title
 pygame.display.set_caption("Snake With Harshad")
@@ -45,8 +57,9 @@ def welcome():
     exit_game = False
     while not exit_game:
         gameWindow.fill((233,210,229))
-        text_screen("Welcome to Snakes", black, 260, 200)
-        text_screen("Press Space Bar To Play", black, 232, 250)
+        gameWindow.blit(homeimg,(0,0))
+        text_screen("Welcome to Snakes..!!", green, 110, 100)
+        text_screen("Press Space Bar To Play", green, 95, 150)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 exit_game = True
@@ -87,7 +100,10 @@ def gameloop():
     while not exit_game:
         if game_over:
             gameWindow.fill(white)
+            gameWindow.blit(goimg,(0,0))
             text_screen("Game Over..!! Press Enter To Continue",red,100,200)
+            
+
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -145,19 +161,21 @@ def gameloop():
 
             gameWindow.fill(white)
             gameWindow.blit(bgimg,(0,0))
-            text_screen("Score: " + str(score * 10), red, 5, 5)
+            text_screen("Score: " + str(score * 10), blue, 5, 5)
             #create food
             pygame.draw.rect(gameWindow,red, [food_x, food_y, snake_size , snake_size ])
-            # Create Snake
-            #pygame.draw.rect(gameWindow,black, [snake_x, snake_y, snake_size , snake_size ])  
+            
             
             head = []
             head.append(snake_x)
             head.append(snake_y)
             snk_list.append(head)
+           
 
             if len(snk_list)>snk_length:
                 del snk_list[0]
+              #  pygame.mixer.music.load('beep.mp3')
+              #  pygame.mixer.music.play()
 
             #Collision Occure then Game over
             if head in snk_list[:-1]:
