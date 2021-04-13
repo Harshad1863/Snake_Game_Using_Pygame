@@ -10,7 +10,7 @@ pygame.init()
 
 #colors
 white =(255,255,255)
-red = (255,0,0)
+red = (255,7,58)
 black =(0,0,0)
 green = (57,255,20)
 blue = (31,81,255)
